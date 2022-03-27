@@ -5,6 +5,7 @@ import netology.repository.Repository;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Manager {
@@ -32,7 +33,7 @@ public class Manager {
         return findBy(issue -> issue.getAssignee().equalsIgnoreCase(assignee));
     }
     public Collection<Issue> searchByOpen(boolean open) {
-        return findBy(issue -> issue.isOpen().equalsIgn oreCase(open));
+        return findBy(issue -> Objects.equals(issue.isOpen(), open));
     }
     private Collection<Issue> findBy(Predicate<Issue> filter) {
         Collection<Issue> allFromRepo = repository.findAll();

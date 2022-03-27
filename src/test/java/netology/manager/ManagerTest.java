@@ -17,7 +17,6 @@ class ManagerTest {
     private final Manager manager = new Manager(repository);
 
     Issue first = new Issue(1, "Mark", "rt", "Alex", true, "Добавлены ссылки",new HashSet<>());
-
     Issue second = new Issue(2, "Mark", "yu", "Linda", false, "Исправлено",new HashSet<>());
     Issue third = new Issue(3, "Jack", "yu", "Alex", true, "Добавлено обновление",new HashSet<>() );
     Issue forth = new Issue(4, "JacK", "rt", "Linda", true,"Удалены картинки",new HashSet<>());
@@ -59,5 +58,24 @@ class ManagerTest {
         manager.add(forth);
         first.getTags().add("re");
         assertEquals(List.of(first, third), manager.searchByAssignee("Alex"));
+    }
+
+    @Test
+    void searchByOpen() {
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(forth);
+        first.getTags().add("re");
+        assertEquals(List.of(first, third, forth), manager.searchByOpen(true));
+    }
+    @Test
+    void searchByOpen1() {
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(forth);
+        first.getTags().add("re");
+        assertEquals(List.of(second), manager.searchByOpen(false));
     }
 }
